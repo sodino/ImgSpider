@@ -1,0 +1,17 @@
+{
+  "name": "qq.img.spider",
+  "version": "0.0.1",
+  "description": "QQWebImageGallerySpider",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error : no test specified\" && exit 1"
+  },
+  "keywords": [
+    "spider"
+  ],
+  "author": "sodino",
+  "license": "ISC",
+  "dependencies": {
+    "superagent-charset": "^1.0.0"
+  }
+}
