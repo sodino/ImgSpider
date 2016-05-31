@@ -59,7 +59,7 @@ app.post('/imgs.html', (req, resp) => {
 
 
 app.listen(1024);
-console.log('server running on http://localhost:1024');
+console.log('server running on http://localhost:1024/imgs.html');
 
 
 

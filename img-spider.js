@@ -4,7 +4,7 @@ var qqImgs = require('./qqImgs.js');
 
 
 var ImgSpider = function(){
-    this.arrUrls = null;
+    this.arrUrls = [];
     this.arrImgGallery = [];
     this.callback = null;
 };
@@ -17,8 +17,8 @@ ImgSpider.prototype.spider = function(arrUrl, callback){
 		throw new Error("arrUrl is empty.");
 	}
 	this.callback = callback;
-    this.arrUrls = arrUrl;
-    this.arrUrls.forEach((element, index, arr) => {
+    
+    arrUrl.forEach((element, index, arr) => {
 
     	if (ifengImgs.prototype.RegExp.test(element)) {
     		runSpider(element, ifengImgs, this);
@@ -27,20 +27,26 @@ ImgSpider.prototype.spider = function(arrUrl, callback){
     	} else if (qqImgs.prototype.RegExp.test(element)) {	
     		runSpider(element, qqImgs, this);
     	} else {
-    		var err = new Error("Can't support this url:[" + element + ']');
-    		callback(err, null);
+    		element = element.trim();
+    		if (element.length > 0) {
+	    		var err = new Error("Can't support this url:[" + element + ']');
+	    		callback(err, null);    			
+    		} else {
+    			// do nothing..
+    		}
     	}
     	
     });
 };
 
 ImgSpider.prototype.clean = function () {
-	this.arrUrls = null;
+	this.arrUrls = [];
 	this.arrImgGallery = [];
 	this.callback = null;
 };
 
 function runSpider(url, constructor, imgSpider) {
+	imgSpider.arrUrls.push(url);
 	spider = new constructor();
 	spider.spider(url, (err, imgGallery) => {
 		if (err) {
